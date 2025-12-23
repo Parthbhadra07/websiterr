@@ -130,13 +130,13 @@ const HeroSection = () => {
           transition={{ delay: 0.5, duration: 2, ease: 'easeInOut' }}
           className="absolute mt-64 sm:mt-80 lg:mt-88 text-base sm:text-xl tracking-[0.4em] uppercase text-gray-200 z-40"
         >
-          design your dream home with us
+          Design your dream home with us
         </motion.p>
 
-        <p className="sm:hidden absolute rotate-90 top-52 -right-16 text-gray-800 dark:text-gray-400">Design & Build Experts <br /> Since 2020</p>
+        <p className="sm:hidden absolute rotate-90 top-52 -right-16 text-beige/80 z-40">Design & Build Experts <br /> Established2016</p>
 
         <div className="flex flex-col md:flex-row md:gap-6 w-full md:min-w-[55vw] sm:max-w-[60vw] justify-between items-start md:items-center absolute bottom-[8%] md:bottom-[25%] z-30 ml-0 md:ml-5">
-          <p className="hidden sm:block text-gray-800 dark:text-gray-400 w-full">Design & Build Experts <br /> Since 2020</p>
+          <p className="hidden sm:block text-beige/80 w-full z-40">Design & Build Experts <br /> Established2016</p>
           <div className='flex max-sm:flex-col gap-2 md:gap-6 max-sm:w-full'>
             <button className="max-sm:flex max-sm:justify-between px-6 py-3 sm:px-6 rounded-full flex items-center gap-6 sm:gap-2 sm:hover:scale-105
                    text-white dark:text-black

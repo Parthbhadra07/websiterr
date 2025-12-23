@@ -5,9 +5,14 @@
 /* globals.css */
 :root {
   --background: #22333B;
-  --foreground: #000000;
-  --primary: #4F46E5;
+  --foreground: #C6AC8F;
+  --primary: #C6AC8F;
   --primary-foreground: #ffffff;
+  --accent-beige: #C6AC8F;
+  --beige-light: #E8D9C7;
+  --beige-dark: #A68B6F;
+  --text-secondary: #D4C4B0;
+  --text-muted: #8B7A6B;
 }
 
 html {
@@ -22,9 +27,14 @@ body {
 
 .dark {
   --background: #22333B;
-  --foreground: #ffffff;
-  --primary: #6366f1;
+  --foreground: #C6AC8F;
+  --primary: #C6AC8F;
   --primary-foreground: #ffffff;
+  --accent-beige: #C6AC8F;
+  --beige-light: #E8D9C7;
+  --beige-dark: #A68B6F;
+  --text-secondary: #D4C4B0;
+  --text-muted: #8B7A6B;
 }
 
 /* Smooth scroll animations */

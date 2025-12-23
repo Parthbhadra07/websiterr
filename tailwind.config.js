@@ -20,6 +20,7 @@ module.exports = {
       fontFamily: {
         dmSans: ['DM Sans', 'sans-serif'],
         mozilla: ['Mozilla Text', 'serif'],
+        samarkan: ['Samarkan', 'cursive', 'sans-serif'],
       },
       colors: {
         background: 'var(--background)',
@@ -28,11 +29,16 @@ module.exports = {
           DEFAULT: 'var(--primary)',
           foreground: 'var(--primary-foreground)',
         },
-        secondary: "#F59E0B",
-        accent: "#10B981",
+        beige: {
+          DEFAULT: '#C6AC8F',
+          light: '#E8D9C7',
+          dark: '#A68B6F',
+        },
+        secondary: "#D4C4B0",
+        accent: "#C6AC8F",
         danger: "#EF4444",
         success: "#22C55E",
-        muted: "#6B7280",
+        muted: "#8B7A6B",
         white: "#ffffff",
         black: "#000000",
       },

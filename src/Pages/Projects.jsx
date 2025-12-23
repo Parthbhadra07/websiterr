@@ -5,6 +5,8 @@ function Projects() {
   const [projects, setProjects] = useState([]);
   const [selectedProject, setSelectedProject] = useState(null);
   const [activeImageIndex, setActiveImageIndex] = useState(0);
+  const [fullscreenImage, setFullscreenImage] = useState(null);
+  const [fullscreenImageIndex, setFullscreenImageIndex] = useState(0);
 
   useEffect(() => {
     setProjects(getProjects());
@@ -31,6 +33,47 @@ function Projects() {
       prev === 0 ? selectedProject.images.length - 1 : prev - 1
     );
   };
+
+  const openFullscreen = (imageIndex) => {
+    if (!selectedProject) return;
+    setFullscreenImage(selectedProject.images[imageIndex]);
+    setFullscreenImageIndex(imageIndex);
+  };
+
+  const closeFullscreen = () => {
+    setFullscreenImage(null);
+    setFullscreenImageIndex(0);
+  };
+
+  const nextFullscreenImage = () => {
+    if (!selectedProject) return;
+    const nextIndex = (fullscreenImageIndex + 1) % selectedProject.images.length;
+    setFullscreenImageIndex(nextIndex);
+    setFullscreenImage(selectedProject.images[nextIndex]);
+  };
+
+  const prevFullscreenImage = () => {
+    if (!selectedProject) return;
+    const prevIndex = fullscreenImageIndex === 0 ? selectedProject.images.length - 1 : fullscreenImageIndex - 1;
+    setFullscreenImageIndex(prevIndex);
+    setFullscreenImage(selectedProject.images[prevIndex]);
+  };
+
+  // Keyboard navigation for fullscreen
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (!fullscreenImage) return;
+      if (e.key === 'Escape') {
+        closeFullscreen();
+      } else if (e.key === 'ArrowRight') {
+        nextFullscreenImage();
+      } else if (e.key === 'ArrowLeft') {
+        prevFullscreenImage();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [fullscreenImage, fullscreenImageIndex, selectedProject]);
 
   return (
     <section className="min-h-screen px-6 md:px-16 py-16 bg-background text-white">
@@ -93,42 +136,43 @@ function Projects() {
       </div>
 
       {selectedProject && (
-        <div className="fixed inset-0 bg-black/80 backdrop-blur flex items-center justify-center px-4 py-8 z-50">
-          <div className="relative max-w-6xl w-full bg-[#111418] rounded-3xl border border-white/10 p-8 shadow-2xl overflow-hidden">
+        <div className="fixed inset-0 bg-black/80 backdrop-blur flex items-center justify-center px-4 sm:px-6 py-4 sm:py-8 z-50 overflow-y-auto">
+          <div className="relative max-w-6xl w-full bg-[#111418] rounded-2xl sm:rounded-3xl border border-white/10 p-4 sm:p-6 md:p-8 shadow-2xl overflow-hidden my-4 sm:my-8">
             <button
-              className="absolute top-4 right-4 text-gray-400 hover:text-white"
+              className="absolute top-2 right-2 sm:top-4 sm:right-4 text-gray-400 hover:text-white z-10"
               onClick={closeProject}
             >
-              <span className="material-symbols-outlined text-3xl">close</span>
+              <span className="material-symbols-outlined text-2xl sm:text-3xl">close</span>
             </button>
 
-            <div className="grid lg:grid-cols-2 gap-8">
-              <div className="space-y-4">
+            <div className="grid lg:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
+              <div className="space-y-3 sm:space-y-4">
                 <div className="relative">
                   <img
                     src={selectedProject.images[activeImageIndex]}
                     alt={`${selectedProject.name} view ${activeImageIndex + 1}`}
-                    className="w-full h-80 object-cover rounded-2xl"
+                    className="w-full h-48 sm:h-64 md:h-80 object-cover rounded-xl sm:rounded-2xl cursor-pointer hover:opacity-90 transition"
+                    onClick={() => openFullscreen(activeImageIndex)}
                   />
                   <button
                     onClick={prevImage}
-                    className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/60 border border-white/20 rounded-full p-2 hover:bg-black/80"
+                    className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 bg-black/60 border border-white/20 rounded-full p-1.5 sm:p-2 hover:bg-black/80"
                   >
-                    <span className="material-symbols-outlined">chevron_left</span>
+                    <span className="material-symbols-outlined text-lg sm:text-xl">chevron_left</span>
                   </button>
                   <button
                     onClick={nextImage}
-                    className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/60 border border-white/20 rounded-full p-2 hover:bg-black/80"
+                    className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 bg-black/60 border border-white/20 rounded-full p-1.5 sm:p-2 hover:bg-black/80"
                   >
-                    <span className="material-symbols-outlined">chevron_right</span>
+                    <span className="material-symbols-outlined text-lg sm:text-xl">chevron_right</span>
                   </button>
                 </div>
-                <div className="flex gap-3 overflow-x-auto pb-2">
+                <div className="flex gap-2 sm:gap-3 overflow-x-auto pb-2">
                   {selectedProject.images.map((img, index) => (
                     <button
                       key={img}
                       onClick={() => setActiveImageIndex(index)}
-                      className={`h-20 w-28 rounded-xl overflow-hidden border ${
+                      className={`h-16 w-20 sm:h-20 sm:w-28 rounded-lg sm:rounded-xl overflow-hidden border flex-shrink-0 ${
                         activeImageIndex === index
                           ? "border-primary"
                           : "border-transparent opacity-60"
@@ -144,14 +188,14 @@ function Projects() {
                 </div>
               </div>
 
-              <div className="space-y-4">
+              <div className="space-y-3 sm:space-y-4">
                 <p className="text-xs uppercase tracking-[0.4em] text-primary">
                   {selectedProject.category}
                 </p>
-                <h2 className="text-3xl font-semibold">{selectedProject.name}</h2>
-                <p className="text-gray-300">{selectedProject.description}</p>
+                <h2 className="text-2xl sm:text-3xl font-semibold">{selectedProject.name}</h2>
+                <p className="text-gray-300 text-sm sm:text-base">{selectedProject.description}</p>
 
-                <dl className="grid grid-cols-2 gap-4 text-sm text-gray-400">
+                <dl className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 text-sm text-gray-400">
                   <div>
                     <dt className="uppercase tracking-[0.3em] text-xs text-gray-500">
                       Location
@@ -184,6 +228,64 @@ function Projects() {
             </div>
           </div>
     </div>
+      )}
+
+      {/* Fullscreen Image Viewer */}
+      {fullscreenImage && selectedProject && (
+        <div
+          className="fixed inset-0 bg-black/95 backdrop-blur z-[100] flex items-center justify-center p-4"
+          onClick={closeFullscreen}
+        >
+          <button
+            onClick={closeFullscreen}
+            className="absolute top-4 right-4 sm:top-6 sm:right-6 text-white hover:text-primary z-10 bg-black/50 rounded-full p-2 transition"
+            aria-label="Close"
+          >
+            <span className="material-symbols-outlined text-2xl sm:text-3xl">close</span>
+          </button>
+
+          {selectedProject.images.length > 1 && (
+            <>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  prevFullscreenImage();
+                }}
+                className="absolute left-4 sm:left-8 top-1/2 -translate-y-1/2 text-white hover:text-primary z-10 bg-black/50 rounded-full p-2 sm:p-3 transition"
+                aria-label="Previous"
+              >
+                <span className="material-symbols-outlined text-2xl sm:text-3xl">chevron_left</span>
+              </button>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  nextFullscreenImage();
+                }}
+                className="absolute right-4 sm:right-8 top-1/2 -translate-y-1/2 text-white hover:text-primary z-10 bg-black/50 rounded-full p-2 sm:p-3 transition"
+                aria-label="Next"
+              >
+                <span className="material-symbols-outlined text-2xl sm:text-3xl">chevron_right</span>
+              </button>
+            </>
+          )}
+
+          <div
+            className="relative max-w-7xl max-h-[90vh] w-full h-full flex items-center justify-center"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <img
+              src={fullscreenImage}
+              alt={`${selectedProject.name} - Fullscreen view`}
+              className="max-w-full max-h-[90vh] object-contain rounded-lg"
+            />
+          </div>
+
+          {selectedProject.images.length > 1 && (
+            <div className="absolute bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 text-white bg-black/50 rounded-full px-4 py-2 text-sm">
+              {fullscreenImageIndex + 1} / {selectedProject.images.length}
+            </div>
+          )}
+        </div>
       )}
     </section>
   );

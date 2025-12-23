@@ -42,15 +42,15 @@ const GallerySlider = () => {
   };
 
   return (
-    <section ref={ref} className="w-full text-white flex flex-col items-center justify-center sm:px-6 md:px-16">
+    <section ref={ref} className="w-full text-beige flex flex-col items-center justify-center sm:px-6 md:px-16">
       {/* Title Section */}
       <motion.div animate={titleControls} initial={{ y: 30, opacity: 0 }} className="w-full flex justify-between items-center mb-6 sm:mb-10">
         <h2 className="text-3xl sm:text-4xl md:text-4xl lg:text-6xl font-light leading-snug font-mozilla font-normal">
-          <span className="text-black dark:text-white">Decorate</span>{" "}
-          <span className="text-gray-500 dark:text-gray-400">to make it feel homey</span>{" "}
-          <span className="text-black dark:text-white">every inch of the house</span>{" "}
+          <span className="text-beige-light">Decorate</span>{" "}
+          <span className="text-beige/70">to make it feel homey</span>{" "}
+          <span className="text-beige-light">every inch of the house</span>{" "}
         </h2>
-        <p className="hidden md:block text-gray-600 dark:text-gray-400 sm:text-right max-w-[300px] leading-relaxed text-sm">
+        <p className="hidden md:block text-beige/80 sm:text-right max-w-[300px] leading-relaxed text-sm">
           Carve out a little piece of paradise with some of our top picks, the home of your dreams begins with the perfect palette for every room.
         </p>
       </motion.div>
@@ -69,7 +69,7 @@ const GallerySlider = () => {
             <img src={image.src} alt={image.alt} className="object-cover w-full h-[200px] sm:h-full group-hover:scale-105 transition-transform duration-500 ease-in-out" />
             {activeIndex === index && (
               <button className="absolute inset-0 flex items-center justify-center">
-                <div className="px-6 py-3 border border-white dark:border-black rounded-full text-sm flex items-center gap-2 bg-black bg-opacity-50 hover:bg-white dark:hover:bg-black hover:text-black dark:hover:text-white transition-all duration-300 hover:gap-4">
+                <div className="px-6 py-3 border border-beige/60 rounded-full text-sm flex items-center gap-2 bg-background bg-opacity-70 hover:bg-beige hover:text-background text-beige transition-all duration-300 hover:gap-4">
                   Learn More <span className="material-symbols-outlined">arrow_forward_ios</span>
                 </div>
               </button>
@@ -79,7 +79,7 @@ const GallerySlider = () => {
       </motion.div>
 
       {/* Mobile Text */}
-      <p className="md:hidden text-gray-400 text-center mt-6 text-sm max-w-md">
+      <p className="md:hidden text-beige/80 text-center mt-6 text-sm max-w-md">
         Carve out a little piece of paradise with some of our top picks, the home of your dreams begins with the perfect palette for every room.
       </p>
     </section>

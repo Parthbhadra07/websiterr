@@ -37,19 +37,19 @@ const ProjectStats = () => {
           <h3 className="text-2xl sm:text-3xl">
             <CountUp start={isInView ? 0 : null} end={99} duration={1.5} /> <span className="text-gray-500">+</span>
           </h3>
-          <p className="text-gray-400 text-xs">Success project</p>
+          <p className="text-beige/70 text-xs">Success project</p>
         </div>
         <div className="flex flex-col justify-center items-center text-center">
-          <h3 className="text-2xl sm:text-3xl">
-            <CountUp start={isInView ? 0 : null} end={199} duration={1.5} /> <span className="text-gray-500">+</span>
+          <h3 className="text-2xl sm:text-3xl text-beige">
+            <CountUp start={isInView ? 0 : null} end={199} duration={1.5} /> <span className="text-beige/60">+</span>
           </h3>
-          <p className="text-gray-400 text-xs">Product launches</p>
+          <p className="text-beige/70 text-xs">Product launches</p>
         </div>
         <div className="flex flex-col justify-center items-center text-center">
-          <h3 className="text-2xl sm:text-3xl">
-            <CountUp start={isInView ? 0 : null} end={999} duration={1.5} /> <span className="text-gray-500">+</span>
+          <h3 className="text-2xl sm:text-3xl text-beige">
+            <CountUp start={isInView ? 0 : null} end={999} duration={1.5} /> <span className="text-beige/60">+</span>
           </h3>
-          <p className="text-gray-400 text-xs">Happy customer</p>
+          <p className="text-beige/70 text-xs">Happy customer</p>
         </div>
       </div>
       {/* Left Image */}
@@ -100,21 +100,21 @@ const ProjectStats = () => {
         animate={rightControls}
         className="w-full md:w-1/2 flex flex-col gap-8 items-start md:items-end text-start md:text-right"
       >
-        <h2 className="text-xl md:text-2xl font-light leading-relaxed text-black dark:text-gray-400">
+        <h2 className="text-xl md:text-2xl font-light leading-relaxed text-beige/90 dark:text-beige/80">
           The key difference between ordinary and special,{" "}
-          <span className="text-gray-400 dark:text-white">
+          <span className="text-beige/70 dark:text-beige-light">
             No matter the season, our spaces are as nuanced as the lifestyles they reflect, <br />
           </span>
-          don’t just dream it.
+          don't just dream it.
         </h2>
 
         {/* Stats */}
         <div className="hidden sm:flex flex-row gap-12 font-dmSans hidden sm:block items-center">
           <div className="flex flex-col justify-center items-center">
-            <h3 className="text-2xl sm:text-3xl">
-              <CountUp start={isInView ? 0 : null} end={99} duration={1.5} /> <span className="text-gray-500">+</span>
+            <h3 className="text-2xl sm:text-3xl text-beige">
+              <CountUp start={isInView ? 0 : null} end={99} duration={1.5} /> <span className="text-beige/60">+</span>
             </h3>
-            <p className="text-gray-400 text-xs">Success project</p>
+            <p className="text-beige/70 text-xs">Success project</p>
           </div>
           <div className="flex flex-col justify-center items-center">
             <h3 className="text-2xl sm:text-3xl">
@@ -123,15 +123,15 @@ const ProjectStats = () => {
             <p className="text-gray-400 text-xs">Product launches</p>
           </div>
           <div className="flex flex-col justify-center items-center">
-            <h3 className="text-3xl transition">
-              <CountUp start={isInView ? 0 : null} end={999} duration={1.5} /> <span className="text-gray-500">+</span>
+            <h3 className="text-3xl transition text-beige">
+              <CountUp start={isInView ? 0 : null} end={999} duration={1.5} /> <span className="text-beige/60">+</span>
             </h3>
-            <p className="text-gray-400 text-xs">Happy customer</p>
+            <p className="text-beige/70 text-xs">Happy customer</p>
           </div>
         </div>
 
         {/* About Button */}
-        <button className="mt-4 px-6 py-3 border border-black dark:border-white rounded-full flex items-end gap-2 hover:bg-black dark:hover:bg-white hover:text-white dark:hover:text-black transition hover:gap-4 transition-all duration-300 ease-in-out mr-2 hover:mr-0">
+        <button className="mt-4 px-6 py-3 border border-beige/40 dark:border-beige rounded-full flex items-end gap-2 hover:bg-beige dark:hover:bg-beige hover:text-background dark:hover:text-background text-beige dark:text-beige transition hover:gap-4 transition-all duration-300 ease-in-out mr-2 hover:mr-0">
           About Us <span className="material-symbols-outlined">arrow_forward_ios</span>
         </button>
       </motion.div>

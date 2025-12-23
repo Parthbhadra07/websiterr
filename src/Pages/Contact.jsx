@@ -77,9 +77,9 @@ export default function Contact() {
         </p>
       </header>
 
-      <div className="grid gap-10 lg:grid-cols-2 items-start">
-        <div className="space-y-6">
-          <div className="rounded-3xl bg-gradient-to-br from-[#2c3a40] to-[#101418] border border-white/10 p-8">
+      <div className="grid gap-6 sm:gap-8 md:gap-10 lg:grid-cols-2 items-start">
+        <div className="space-y-4 sm:space-y-6">
+          <div className="rounded-2xl sm:rounded-3xl bg-gradient-to-br from-[#2c3a40] to-[#101418] border border-white/10 p-4 sm:p-6 md:p-8">
             <p className="text-sm uppercase tracking-[0.4em] text-primary mb-6">Concierge desk</p>
             <div className="space-y-6">
               {studioContacts.map(({ label, value, icon }) => (
@@ -92,7 +92,7 @@ export default function Contact() {
                 </div>
               ))}
             </div>
-            <div className="mt-10 grid grid-cols-2 gap-6 text-sm text-gray-400 uppercase tracking-[0.3em]">
+            <div className="mt-6 sm:mt-10 grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 text-sm text-gray-400 uppercase tracking-[0.3em]">
               <div>
                 <p>Instagram</p>
                 <p className="text-white normal-case">@rrdesigns.in</p>
@@ -104,7 +104,7 @@ export default function Contact() {
             </div>
           </div>
 
-          <div className="rounded-3xl border border-white/10 p-8 space-y-4 bg-white/5 backdrop-blur">
+          <div className="rounded-2xl sm:rounded-3xl border border-white/10 p-4 sm:p-6 md:p-8 space-y-3 sm:space-y-4 bg-white/5 backdrop-blur">
             <p className="text-sm uppercase tracking-[0.4em] text-primary">Visiting hours</p>
             <p className="text-gray-300">
               Monday to Saturday · 10 AM – 7 PM
@@ -119,9 +119,9 @@ export default function Contact() {
 
         <form
           onSubmit={onSubmit}
-          className="rounded-3xl bg-white/5 border border-white/10 p-8 backdrop-blur space-y-4"
+          className="rounded-2xl sm:rounded-3xl bg-white/5 border border-white/10 p-4 sm:p-6 md:p-8 backdrop-blur space-y-3 sm:space-y-4"
         >
-          <div className="grid gap-4 md:grid-cols-2">
+          <div className="grid gap-3 sm:gap-4 md:grid-cols-2">
             <label className="text-sm text-gray-300">
               Full name
               <input

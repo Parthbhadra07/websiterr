@@ -6,55 +6,93 @@ const STORAGE_KEYS = {
   ADMIN_PASSWORD: 'rr_designs_admin_password',
 };
 
-// Default gallery data
+// Default gallery data with categories and subcategories
 const DEFAULT_GALLERY = [
+  // Commercial - Office
   {
     id: 1,
-    title: "Skyline Residences",
-    location: "Kochi • Residential",
-    image: "https://images.unsplash.com/photo-1616594039302-0f48c2df307d?q=80&w=1400",
+    title: "Modern Office Space",
+    location: "Bengaluru",
+    category: "Commercial",
+    subcategory: "Office",
+    images: ["https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=1400"],
   },
   {
     id: 2,
-    title: "Harborfront Tower",
-    location: "Bengaluru • Commercial",
-    image: "https://images.unsplash.com/photo-1484154218962-a197022b5858?q=80&w=1400",
+    title: "Executive Workspace",
+    location: "Mumbai",
+    category: "Commercial",
+    subcategory: "Office",
+    images: ["https://images.unsplash.com/photo-1497366754035-f200968a6e72?q=80&w=1400"],
   },
+  // Commercial - Mart
   {
     id: 3,
-    title: "Palm Grove Villa",
-    location: "Goa • Luxury Villa",
-    image: "https://images.unsplash.com/photo-1505691938895-1758d7feb511?q=80&w=1400",
+    title: "Shopping Mart Interior",
+    location: "Delhi",
+    category: "Commercial",
+    subcategory: "Mart",
+    images: ["https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=1400"],
   },
+  // Commercial - Store
   {
     id: 4,
-    title: "Cascade Retreat",
-    location: "Munnar • Boutique Stay",
-    image: "https://images.unsplash.com/photo-1464146072230-91cabc968266?q=80&w=1400",
+    title: "Boutique Store Design",
+    location: "Hyderabad",
+    category: "Commercial",
+    subcategory: "Store",
+    images: ["https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=1400"],
   },
+  // Residential - Bedroom
   {
     id: 5,
-    title: "Zenith Lofts",
-    location: "Mumbai • Residential",
-    image: "https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?q=80&w=1400",
+    title: "Luxury Master Bedroom",
+    location: "Kochi",
+    category: "Residential",
+    subcategory: "Bedroom",
+    images: ["https://images.unsplash.com/photo-1616594039302-0f48c2df307d?q=80&w=1400"],
   },
   {
     id: 6,
-    title: "Atrium Exchange",
-    location: "Hyderabad • Corporate",
-    image: "https://images.unsplash.com/photo-1431578500526-4d9613015464?q=80&w=1400",
+    title: "Contemporary Bedroom",
+    location: "Mumbai",
+    category: "Residential",
+    subcategory: "Bedroom",
+    images: ["https://images.unsplash.com/photo-1505691938895-1758d7feb511?q=80&w=1400"],
   },
+  // Residential - Kitchen
   {
     id: 7,
-    title: "Terracotta House",
-    location: "Pune • Contemporary Home",
-    image: "https://images.unsplash.com/photo-1616594039514-7ed9b3567ec4?q=80&w=1400",
+    title: "Modern Kitchen Design",
+    location: "Pune",
+    category: "Residential",
+    subcategory: "Kitchen",
+    images: ["https://images.unsplash.com/photo-1556911220-bff31c812dba?q=80&w=1400"],
   },
   {
     id: 8,
-    title: "Spectrum Studios",
-    location: "Delhi • Co-working",
-    image: "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?q=80&w=1400",
+    title: "Luxury Kitchen",
+    location: "Goa",
+    category: "Residential",
+    subcategory: "Kitchen",
+    images: ["https://images.unsplash.com/photo-1556911220-bff31c812dba?q=80&w=1400"],
+  },
+  // Residential - Hall
+  {
+    id: 9,
+    title: "Elegant Living Hall",
+    location: "Bengaluru",
+    category: "Residential",
+    subcategory: "Hall",
+    images: ["https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?q=80&w=1400"],
+  },
+  {
+    id: 10,
+    title: "Spacious Living Room",
+    location: "Delhi",
+    category: "Residential",
+    subcategory: "Hall",
+    images: ["https://images.unsplash.com/photo-1464146072230-91cabc968266?q=80&w=1400"],
   },
 ];
 
@@ -128,7 +166,41 @@ const initializeData = () => {
 export const getGalleryItems = () => {
   initializeData();
   const data = localStorage.getItem(STORAGE_KEYS.GALLERY);
-  return JSON.parse(data || '[]');
+  const items = JSON.parse(data || '[]');
+  // Migrate old items with 'image' property to 'images' array
+  // Also migrate old items without category/subcategory
+  const migrated = items.map(item => {
+    let updated = { ...item };
+    if (item.image && !item.images) {
+      updated.images = [item.image];
+    }
+    // If no category, try to infer from location or set default
+    if (!updated.category) {
+      const location = (updated.location || '').toLowerCase();
+      if (location.includes('commercial') || location.includes('office') || location.includes('mart') || location.includes('store')) {
+        updated.category = 'Commercial';
+        if (location.includes('office')) updated.subcategory = 'Office';
+        else if (location.includes('mart')) updated.subcategory = 'Mart';
+        else if (location.includes('store')) updated.subcategory = 'Store';
+        else updated.subcategory = 'Office';
+      } else {
+        updated.category = 'Residential';
+        if (location.includes('bedroom')) updated.subcategory = 'Bedroom';
+        else if (location.includes('kitchen')) updated.subcategory = 'Kitchen';
+        else if (location.includes('hall') || location.includes('living')) updated.subcategory = 'Hall';
+        else updated.subcategory = 'Hall';
+      }
+    }
+    if (!updated.subcategory) {
+      updated.subcategory = updated.category === 'Commercial' ? 'Office' : 'Hall';
+    }
+    return updated;
+  });
+  // Save migrated data if changes were made
+  if (JSON.stringify(items) !== JSON.stringify(migrated)) {
+    localStorage.setItem(STORAGE_KEYS.GALLERY, JSON.stringify(migrated));
+  }
+  return migrated;
 };
 
 export const addGalleryItem = (item) => {
@@ -136,7 +208,14 @@ export const addGalleryItem = (item) => {
   const newItem = {
     ...item,
     id: Date.now(), // Simple ID generation
+    images: item.images ? (Array.isArray(item.images) ? item.images : item.images.split(',').map(img => img.trim()).filter(img => img)) : (item.image ? [item.image] : []),
+    category: item.category || 'Residential',
+    subcategory: item.subcategory || 'Hall',
   };
+  // Remove old 'image' property if it exists
+  if (newItem.image) {
+    delete newItem.image;
+  }
   items.push(newItem);
   localStorage.setItem(STORAGE_KEYS.GALLERY, JSON.stringify(items));
   return newItem;
@@ -146,7 +225,17 @@ export const updateGalleryItem = (id, updatedItem) => {
   const items = getGalleryItems();
   const index = items.findIndex(item => item.id === id);
   if (index !== -1) {
-    items[index] = { ...items[index], ...updatedItem, id };
+    const images = updatedItem.images 
+      ? (Array.isArray(updatedItem.images) 
+          ? updatedItem.images 
+          : updatedItem.images.split(',').map(img => img.trim()).filter(img => img))
+      : (updatedItem.image ? [updatedItem.image] : items[index].images || []);
+    const updated = { ...items[index], ...updatedItem, id, images };
+    // Remove old 'image' property if it exists
+    if (updated.image) {
+      delete updated.image;
+    }
+    items[index] = updated;
     localStorage.setItem(STORAGE_KEYS.GALLERY, JSON.stringify(items));
     return items[index];
   }

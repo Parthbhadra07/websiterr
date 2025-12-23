@@ -2,9 +2,9 @@ import { useMemo, useState } from "react";
 import { sendPricingEmail } from "../utils/emailService";
 
 const TIERS = {
-  normal: { label: "Normal", rate: 1200 },
+  normal: { label: "Basic", rate: 1200 },
   premium: { label: "Premium", rate: 1800 },
-  royal: { label: "Royal", rate: 2500 },
+  royal: { label: "Luxary", rate: 2500 },
 };
 
 const PROPERTY_TYPES = {
@@ -82,10 +82,10 @@ export default function Pricing() {
   };
 
   return (
-    <section className="min-h-screen flex flex-col gap-12 py-16 px-6 md:px-16 text-white">
-      <header className="max-w-3xl space-y-4">
-        <p className="text-sm uppercase tracking-[0.4em] text-primary">RR Designs</p>
-        <h1 className="text-4xl md:text-5xl font-semibold">Transparent pricing for every vision</h1>
+    <section className="min-h-screen flex flex-col gap-8 sm:gap-10 md:gap-12 py-8 sm:py-12 md:py-16 px-4 sm:px-6 md:px-16 text-white">
+      <header className="max-w-3xl space-y-3 sm:space-y-4">
+        <p className="text-xs sm:text-sm uppercase tracking-[0.4em] text-primary">RR Designs</p>
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold">Transparent pricing for every vision</h1>
         <p className="text-gray-200">
           Choose your desired square footage, pick a design intensity, and we&apos;ll instantly project
           the investment required. Estimates include concept, detailing, and turnkey delivery.
@@ -93,8 +93,8 @@ export default function Pricing() {
       </header>
 
       {/* Quote form */}
-      <div className="grid gap-10 lg:grid-cols-2 items-start bg-white/5 border border-white/10 rounded-3xl p-8 backdrop-blur">
-        <div className="space-y-6">
+      <div className="grid gap-6 sm:gap-8 md:gap-10 lg:grid-cols-2 items-start bg-white/5 border border-white/10 rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-8 backdrop-blur">
+        <div className="space-y-4 sm:space-y-6">
           <div>
             <label className="block text-sm uppercase tracking-[0.3em] text-gray-300 mb-2">
               Square footage
@@ -111,15 +111,15 @@ export default function Pricing() {
             <p className="text-xs text-gray-400 mt-2">Tip: include circulation and utility areas for accuracy.</p>
           </div>
 
-          <div className="space-y-3">
-            <p className="text-sm uppercase tracking-[0.3em] text-gray-300">Design level</p>
-            <div className="flex flex-wrap gap-3">
+          <div className="space-y-2 sm:space-y-3">
+            <p className="text-xs sm:text-sm uppercase tracking-[0.3em] text-gray-300">Design level</p>
+            <div className="flex flex-wrap gap-2 sm:gap-3">
               {Object.entries(TIERS).map(([key, tier]) => (
                 <button
                   type="button"
                   key={key}
                   onClick={() => setSelectedTier(key)}
-                  className={`px-4 py-3 rounded-2xl border transition-all duration-200 ${
+                  className={`px-3 sm:px-4 py-2 sm:py-3 rounded-xl sm:rounded-2xl border transition-all duration-200 text-sm sm:text-base ${
                     selectedTier === key
                       ? "border-primary bg-primary/20 text-white"
                       : "border-white/10 text-gray-300 hover:border-primary/50"
@@ -132,9 +132,9 @@ export default function Pricing() {
             </div>
           </div>
 
-          <div className="rounded-3xl bg-black/40 border border-white/10 p-6 flex flex-col gap-2">
-            <p className="text-sm uppercase tracking-[0.3em] text-gray-400">Estimated quote</p>
-            <p className="text-4xl font-semibold">{currency.format(estimatedQuote || 0)}</p>
+          <div className="rounded-2xl sm:rounded-3xl bg-black/40 border border-white/10 p-4 sm:p-6 flex flex-col gap-2">
+            <p className="text-xs sm:text-sm uppercase tracking-[0.3em] text-gray-400">Estimated quote</p>
+            <p className="text-2xl sm:text-3xl md:text-4xl font-semibold">{currency.format(estimatedQuote || 0)}</p>
             <p className="text-xs text-gray-400">
               Includes furniture concept, lighting plan, finishes selection, and on-site supervision for the chosen tier.
             </p>
@@ -142,13 +142,13 @@ export default function Pricing() {
         </div>
 
         {/* Slider quotation maker */}
-        <div className="rounded-3xl bg-gradient-to-br from-[#2e3f46] to-[#11181c] border border-white/10 p-8 space-y-6">
+        <div className="rounded-2xl sm:rounded-3xl bg-gradient-to-br from-[#2e3f46] to-[#11181c] border border-white/10 p-4 sm:p-6 md:p-8 space-y-4 sm:space-y-6">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm uppercase tracking-[0.3em] text-gray-300">Quick quotation maker</p>
-              <h2 className="text-2xl font-semibold">Slide to explore budgets</h2>
+              <p className="text-xs sm:text-sm uppercase tracking-[0.3em] text-gray-300">Quick quotation maker</p>
+              <h2 className="text-xl sm:text-2xl font-semibold">Slide to explore budgets</h2>
             </div>
-            <span className="material-symbols-outlined text-4xl text-primary">tune</span>
+            <span className="material-symbols-outlined text-2xl sm:text-3xl md:text-4xl text-primary">tune</span>
           </div>
 
           <div>
@@ -170,13 +170,13 @@ export default function Pricing() {
             </p>
           </div>
 
-          <div className="flex gap-3 flex-wrap">
+          <div className="flex gap-2 sm:gap-3 flex-wrap">
             {Object.entries(PROPERTY_TYPES).map(([key, type]) => (
               <button
                 key={key}
                 type="button"
                 onClick={() => setPropertyType(key)}
-                className={`px-5 py-3 rounded-2xl border transition ${
+                className={`px-3 sm:px-4 md:px-5 py-2 sm:py-3 rounded-xl sm:rounded-2xl border transition text-sm sm:text-base ${
                   propertyType === key ? "border-primary bg-primary/20" : "border-white/10 text-gray-300"
                 }`}
               >
@@ -186,9 +186,9 @@ export default function Pricing() {
             ))}
           </div>
 
-          <div className="bg-black/40 rounded-3xl p-6 border border-white/10">
-            <p className="text-sm uppercase tracking-[0.3em] text-gray-400">Projected investment</p>
-            <p className="text-4xl font-semibold">{currency.format(sliderQuote)}</p>
+          <div className="bg-black/40 rounded-2xl sm:rounded-3xl p-4 sm:p-6 border border-white/10">
+            <p className="text-xs sm:text-sm uppercase tracking-[0.3em] text-gray-400">Projected investment</p>
+            <p className="text-2xl sm:text-3xl md:text-4xl font-semibold">{currency.format(sliderQuote)}</p>
             <p className="text-xs text-gray-400 mt-2">
               Drag the slider or switch property type tabs to see how sector-specific rates influence budgets.
             </p>
@@ -196,10 +196,10 @@ export default function Pricing() {
         </div>
       </div>
 
-      <div className="grid gap-8 lg:grid-cols-2">
-        <div className="space-y-4">
-          <p className="text-sm uppercase tracking-[0.4em] text-primary">Get a bespoke proposal</p>
-          <h2 className="text-3xl font-semibold">Tell us about your project</h2>
+      <div className="grid gap-6 sm:gap-8 lg:grid-cols-2">
+        <div className="space-y-3 sm:space-y-4">
+          <p className="text-xs sm:text-sm uppercase tracking-[0.4em] text-primary">Get a bespoke proposal</p>
+          <h2 className="text-2xl sm:text-3xl font-semibold">Tell us about your project</h2>
           <p className="text-gray-300">
             Share a few basics and the RR Designs concierge team will send a detailed quote with timelines, material palettes,
             and scope notes. No spam—just thoughtful guidance.
@@ -208,9 +208,9 @@ export default function Pricing() {
 
         <form
           onSubmit={handleSubmit}
-          className="bg-white/5 border border-white/10 rounded-3xl p-8 backdrop-blur space-y-4"
+          className="bg-white/5 border border-white/10 rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-8 backdrop-blur space-y-3 sm:space-y-4"
         >
-          <div className="grid gap-4 md:grid-cols-2">
+          <div className="grid gap-3 sm:gap-4 md:grid-cols-2">
             <div>
               <label className="text-sm text-gray-300">Full name</label>
               <input
